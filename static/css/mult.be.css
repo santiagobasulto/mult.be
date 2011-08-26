@@ -1,0 +1,51 @@
+h1{
+    font-size:88px;
+    margin:25px 0 50px;
+    text-align:center;
+}
+h1 span{
+	color:#FF5E99;
+}
+p{
+    font-size:20px;
+    margin:25px 0;
+    text-align:center;
+}
+strong{
+    font-size:24px;
+}
+div.center{
+    width:700px;
+    margin:0 auto;
+}
+.disclaimer{
+	color:red;
+	font-weight: bold;
+	margin-top:0px;
+}
+footer{
+	width:100%;
+	position:absolute;
+	bottom:0;
+	padding: 10px 0px 10px 0px;
+}
+footer span{
+	color:#FF5E99;
+	font-size: 1.5em;
+	font-weight: bold;
+}
+footer div{
+	padding: 0px 10px 0px 10px;
+	margin:0 auto;
+	width:350px;
+}
+footer div ul li{
+	display:inline;
+	margin:0px 20px 0px 20px;
+}
+footer div ul li a{
+	text-decoration: none;
+}
+footer div ul li a:hover{
+	text-decoration: underline;
+}

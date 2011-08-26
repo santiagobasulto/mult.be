@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block title %}Happy Sharing!{% endblock %}
+
+{% block main %}
+<h1>Your <span>U</span>RL:</h1>
+
+{% if urls: %}
+	{% for url in urls: %}
+		<p><a href="{{ url.protocol }}://{{ url.hostname }}{{ url.querystring }}">{{ url.protocol }}://{{ url.hostname }}{{ url.querystring }} &rarr;</a></p>
+	{% endfor %}
+{% endif %}
+
+{% endblock %}
+
+<a href='#'>&larr; Home</a>
+

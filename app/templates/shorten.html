@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Happy Sharing!{% endblock %}
+
+{% block main %}
+<h1>Happy Sharing<span>!</span></h1>
+<p><a href="{{ url_for('display_shortened_urls',hash=hash) }}">{{ url_for('display_shortened_urls',hash=hash) }} &rarr;</a></p>
+
+{% endblock %}

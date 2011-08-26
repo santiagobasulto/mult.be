@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/css/formalize.css">
+<style>
+    input.input_url{
+        font-size:20px;
+        padding:5px;
+        width:600px;
+        margin-bottom:10px;
+        color:#ccc;
+    }
+    input.add-url{
+        margin:0 5px 0px 10px;
+        padding:5px 10px;
+    }
+    input.send_urls{
+    	margin:0 auto;
+    	margin-top:10px;
+    	width:200px;
+    }
+    .add-url img{
+    	position:relative;
+    	top: 7px;
+    	left:5px;
+    }
+    #button-block{
+    	width: 220px;
+    	margin:0 auto;
+    	position:relative;
+    }
+    h1 span::selection,h1 span::-moz-selection,h1 span::-webkit-selection {
+		background:#444;
+		color:#fff;
+	}
+</style>
+{% endblock %}
+
+
+{% block main %}
+<p class='disclaimer'>This is a experimental web site. Don't expect your links to be preserved. Use it at your own risk</p>
+<h1>Mult.<span>be</span></h1>
+
+<div class="center">
+	<div id='shoretner-inputs-block'>
+		<form action="{{ url_for('shorten') }}" method="post">
+			<div id='inputs-block'>
+				<input id='url-1' name="urls" type="text" class='input_url' value="">
+				<a href='#' class='add-url'><img src='/img/Add-32.png' title='Add Url' /></a>
+			</div>
+			<!-- Send Button -->
+			<div id='button-block'>
+				<input id="submit" name="submit" type="submit" value="Shorten!" class='send_urls'>
+			</div>
+		</form>
+	</div> 
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+<script type="text/javascript">
+	var count = 1;
+	var settings = {
+		input_radius : "10px",
+		input_focus_color:"#000",
+		input_blur_color:"#CCC",
+		input_default_value: "http://"
+	};
+	function newInput(target){
+		count++;
+		idAndName = "url-"+count;
+		$(target).append("<input id='"+idAndName+"' type='text' name='urls' value='http://' class='input_url' /><a href='#' class='add-url'><img src='/img/Add-32.png' title='Add Url' /></a>");
+		var input = $("#"+idAndName);
+		initializeUrlInput(input)
+		return false;
+	}
+	
+	function initializeUrlInput(input){
+		var input = $(input);
+		input.focus();
+		input.val(settings.input_default_value);
+	}
+	
+	function inputUrlGetFocus(e){
+		$(this).css('color',settings.input_focus_color);
+	}
+	
+	function inputUrlLooseFocus(e){
+		$(this).css('color',settings.input_blur_color);
+	}
+	function inputUrlChange(event){
+		//var text = $(this).val();
+		//var howManyHttpProtoclsInString= text.split("http://").length - 1;
+	}
+	
+	function addUrlButtonClicked(event){
+		event.preventDefault();
+		newInput($("#inputs-block"));
+		return false;
+	}
+	$(document).ready(function(){
+		//attach logic to Inputs events
+		
+		$("#shoretner-inputs-block input:text").live("focus",inputUrlGetFocus);
+		$("#shoretner-inputs-block input:text").live("blur",inputUrlLooseFocus);
+		//Reserved for validation
+		//$("#shoretner-inputs-block input:text").live("keyup",inputUrlChange);
+		//$("#shoretner-inputs-block input:text").live("paste",inputUrlChange);
+		$(".add-url").live("click",addUrlButtonClicked);
+		
+		//Initialize first input
+		initializeUrlInput($("#url-1"));
+		//Thanks Nacho! 
+		$(".input_url").live('keydown', function(e) {
+			var keyCode = e.keyCode || e.which;
+			if (keyCode == 9) {
+				//Falta definir comportamiento, el último registro debe permitir crear una nueva fila
+				newInput($("#inputs-block"));
+				return false;
+			}
+		});
+	});
+	
+	</script>
+	{% endblock %}
